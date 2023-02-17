@@ -5,7 +5,7 @@ from keras.models import model_from_json
 
 
 def main():
-    sess = tf.Session()
+    sess = tf.compat.v1.Session()
     K.set_session(sess)
     env = gym.make("MountainCarContinuous-v0")
 
@@ -13,16 +13,16 @@ def main():
     time_steps = 501
 
     # load json and create model
-    json_file = open('./Model/Actor_model_architecture.json', 'r')
+    json_file = open('./Model architecture and trained weights/Actor_model_architecture.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     actor = model_from_json(loaded_model_json)
-    actor.load_weights("./Model/DDPG_actor_model_750.h5")
+    actor.load_weights("./Model architecture and trained weights/DDPG_actor_model_750.h5")
 
     run = True
     if run:
         for episode in range(episodes):
-            state = env.reset()
+            state = env.reset()[0]
             episode_reward = 0
 
             for time in range(time_steps):
@@ -32,12 +32,12 @@ def main():
                 # print("deterministic action:",action)
                 # print("noisy action:", exploratory_action)
 
-                next_state, reward, done, _ = env.step(action)
+                next_state, reward, terminated, truncated, _ = env.step(action)
 
                 episode_reward += reward
                 state = next_state
 
-                if done:
+                if terminated:
                     break
             print("Completed in {} steps.... episode: {}/{}, episode reward: {} "
                   .format(time, episode, episodes, episode_reward))

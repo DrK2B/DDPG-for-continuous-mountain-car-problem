@@ -1,7 +1,7 @@
 from keras.layers import Dense, Input
 from keras.models import Model
 from keras.optimizers import Adam
-from keras.layers.merge import Add
+from keras.layers import Add
 
 import tensorflow as tf
 import keras.backend as K
