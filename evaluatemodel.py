@@ -12,7 +12,6 @@ def main():
     episodes = 400
     time_steps = 501
 
-
     # load json and create model
     json_file = open('./Model/Actor_model_architecture.json', 'r')
     loaded_model_json = json_file.read()
@@ -22,31 +21,27 @@ def main():
 
     run = True
     if run:
-        for episode in range (episodes):
+        for episode in range(episodes):
             state = env.reset()
             episode_reward = 0
 
-            for time in range (time_steps):
+            for time in range(time_steps):
                 env.render()
-                action = actor.predict(state.reshape((1,2)))[0]
-
-
+                action = actor.predict(state.reshape((1, 2)))[0]
 
                 # print("deterministic action:",action)
                 # print("noisy action:", exploratory_action)
 
-                next_state ,reward, done, _ = env.step(action)
+                next_state, reward, done, _ = env.step(action)
 
                 episode_reward += reward
                 state = next_state
-
 
                 if done:
                     break
             print("Completed in {} steps.... episode: {}/{}, episode reward: {} "
                   .format(time, episode, episodes, episode_reward))
         env.close()
-
 
 
 if __name__ == "__main__":
