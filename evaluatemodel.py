@@ -7,7 +7,7 @@ from keras.models import model_from_json
 def main():
     sess = tf.compat.v1.Session()
     K.set_session(sess)
-    env = gym.make("MountainCarContinuous-v0")
+    env = gym.make("MountainCarContinuous-v0", render_mode='human')
 
     episodes = 400
     time_steps = 501
@@ -17,7 +17,7 @@ def main():
     loaded_model_json = json_file.read()
     json_file.close()
     actor = model_from_json(loaded_model_json)
-    actor.load_weights("./Model architecture and trained weights/DDPG_actor_model_750.h5")
+    actor.load_weights("./ModelWeights/DDPG_actor_model_750.h5")
 
     run = True
     if run:
