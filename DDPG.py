@@ -7,12 +7,14 @@ from ounoise import OUNoise
 import tensorflow as tf
 import keras.backend as k
 import pickle
+from tensorflow.python.framework.ops import disable_eager_execution
 
 
 def main():
+    disable_eager_execution()
     sess = tf.compat.v1.Session()
     k.set_session(sess)
-    env = gym.make("MountainCarContinuous-v0")
+    env = gym.make("MountainCarContinuous-v0", render_mode='human')
 
     # Parameters
     memory_size = 100000
@@ -48,7 +50,7 @@ def main():
         # Loop over the number of episodes. At each new episode reset the environment, reset the noise
         # state and set total episode reward to 0
         for episode in range(episodes):
-            state = env.reset()
+            state = env.reset()[0]
             noise.reset()
             episode_reward = 0
 
@@ -58,7 +60,7 @@ def main():
                 # Can also be trained without visualization for the case where we are using
                 # position and velocities as state variables.
 
-                # env.render()
+                env.render()
 
                 # Predict an action from the actor model using the current state
                 action = actor.predict_action(state.reshape((1, 2)))[0]

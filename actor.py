@@ -1,8 +1,9 @@
 from keras.layers import Dense, Input
-from keras.models import Model
+from keras import Model
 from keras.optimizers import Adam
 import tensorflow as tf
 import keras.backend as k
+
 
 
 # Actor class that implements the online actor and its target network and methods to get action predictions,
@@ -39,11 +40,11 @@ class Actor:
 
         # Use the policy gradient calculated above to update the actor weights. Since we multiply negative of
         # dQ/dA, when we try to minimize J we are actually going uphill (gradient ascent)
-        self.optimize = tf.train.AdamOptimizer(self.learning_rate).apply_gradients \
+        self.optimize = tf.optimizers.Adam(self.learning_rate).apply_gradients \
             (zip(self.params_grads, self.model.trainable_weights))
 
         # initialize all graph variables
-        self.sess.run(tf.initialize_all_variables())
+        self.sess.run(tf.compat.v1.global_variables_initializer())
 
     # Same model architecture for both the actor and critic. Important to note that the out layer has a
     # tanh activation to keep our output in the range.
@@ -55,7 +56,7 @@ class Actor:
         output = Dense(env.action_space.shape[0], activation='tanh')(h3)
 
         model = Model(inputs=state_input, outputs=output)
-        adam = Adam(lr=0.001)
+        adam = Adam(learning_rate=0.001)
         model.compile(loss="mse", optimizer=adam)
         return model, state_input
 

@@ -31,7 +31,7 @@ class Critic:
        self.gradients = tf.gradients(self.model.output, self.action_input)
 
        #Initialize all graph variables
-       self.sess.run(tf.initialize_all_variables())
+       self.sess.run(tf.compat.v1.global_variables_initializer())
 
     #Architecture of the critic model and it's target model. The critic take in two inputs; a state and
     #the action taken in that state to calculate the Q-value of a state action pair.
@@ -47,9 +47,9 @@ class Critic:
         merged = Add()([state_h2, action_h1])
         merged_h1 = Dense(24, activation='relu')(merged)
         output = Dense(1, activation='linear')(merged_h1)
-        model = Model(input=[state_input, action_input], output=output)
+        model = Model(inputs=[state_input, action_input], outputs=output)
 
-        adam = Adam(lr=self.learning_rate)
+        adam = Adam(learning_rate=self.learning_rate)
         model.compile(loss="mse", optimizer=adam)
         return model, state_input, action_input
 
