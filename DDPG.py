@@ -56,7 +56,7 @@ def main():
 
             # Loop over the number of steps in an episode
             for time in range(time_steps):
-                # Uncomment the following line of you want to visualize the mountain car during training.
+                # Uncomment the following line if you want to visualize the mountain car during training.
                 # Can also be trained without visualization for the case where we are using
                 # position and velocities as state variables.
 
@@ -78,7 +78,7 @@ def main():
                 # Append this experience sample to the replay memory
                 replay_memory.append(state, exploratory_action, reward, next_state, next_action, terminated)
 
-                # Only start training when there are a minimum number of experience samples available in
+                # Only start training when there is a minimum number of experience samples available in
                 # memory
                 if replay_memory.count() == collect_experience:
                     training = True

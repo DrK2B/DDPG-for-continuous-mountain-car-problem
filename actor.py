@@ -5,7 +5,6 @@ import tensorflow as tf
 import keras.backend as k
 
 
-
 # Actor class that implements the online actor and its target network and methods to get action predictions,
 # train both the models and compute gradients using tensorflow.
 
