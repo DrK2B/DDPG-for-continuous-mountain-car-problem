@@ -127,7 +127,7 @@ def main():
             # Save model's weights and episode rewards after each save_frequency episode
             if training and (episode % save_frequency) == 0:
                 print('Data saved at episode:', episode)
-                actor.save_weights('./Model/DDPG_actor_model_{}.h5'.format(episode))
+                actor.save_weights('./ModelWeights/DDPG_actor_model_{}.h5'.format(episode))
                 pickle.dump(ep_reward, open('./Rewards/rewards_{}.dump'.format(episode), 'wb'))
 
         # Close the mountain car environment
