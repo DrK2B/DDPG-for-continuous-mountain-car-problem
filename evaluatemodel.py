@@ -9,7 +9,7 @@ def main():
     K.set_session(sess)
     env = gym.make("MountainCarContinuous-v0", render_mode='human')
 
-    episodes = 400
+    episodes = 100
     time_steps = 501
 
     # load json and create model
@@ -17,7 +17,7 @@ def main():
     loaded_model_json = json_file.read()
     json_file.close()
     actor = model_from_json(loaded_model_json)
-    actor.load_weights("./ModelWeights/DDPG_actor_model_750.h5")
+    actor.load_weights("./ModelWeights/DDPG_actor_model_1000.h5")
 
     run = True
     if run:
@@ -27,9 +27,9 @@ def main():
 
             for time in range(time_steps):
                 env.render()
-                action = actor.predict(state.reshape((1, 2)))[0]
+                action = actor.predict(state.reshape((1, 2)))[0]  # generates outputs in console
 
-                # print("deterministic action:",action)
+                # print("deterministic action:", action)
                 # print("noisy action:", exploratory_action)
 
                 next_state, reward, terminated, truncated, _ = env.step(action)
