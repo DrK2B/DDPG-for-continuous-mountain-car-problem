@@ -1,12 +1,12 @@
 # DDPG-for-Continuous-mountain-car-problem-openAI-gym-using-Keras-and-Tensorflow
 
-Deep deterministic policy gradient using Keras and Tensorflow with python to solve the Continous mountain car problem provided
+Deep deterministic policy gradient using Keras and Tensorflow with python to solve the continuous mountain car problem provided
 by OpenAI gym.
 
 Input to the model is the position and velocity information of the car while the output is a single real-valued number indicating
 the deterministic action to take given a state.
 
-This work uses many tuorials that I found online and much of my code is similar to the already existing tutorials available online
+This work uses many tutorials that I found online and much of my code is similar to the already existing tutorials available online
 
 
 ## How to use
