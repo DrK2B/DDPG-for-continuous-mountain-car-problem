@@ -10,6 +10,7 @@ import numpy as np
 
 class OUNoise:
     def __init__(self, action_space, mu=0.0, theta=0.15, max_sigma=0.3, min_sigma=0.3, decay_period=100000):
+        self.state = None
         self.mu = mu
         self.theta = theta
         self.sigma = max_sigma

@@ -3,10 +3,10 @@ from collections import deque
 import numpy as np
 
 
-# Class that implements memory structure which stores experiences. Also implements methods to store, rerieve
+# Class that implements memory structure which stores experiences. Also implements methods to store, retrieve
 # and count experiences.
 class ReplayMemory:
-    # initialize the buffer as a python deque structure of the required size
+    # Initialize the buffer as a python deque structure of the required size
     def __init__(self, size):
         self.memory = deque(maxlen=size)
 

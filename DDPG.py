@@ -16,7 +16,7 @@ def main():
     k.set_session(sess)
     env = gym.make("MountainCarContinuous-v0", render_mode='human')
 
-    # Parameters
+    # Hyperparameters
     memory_size = 100000
     batch_size = 32
     tau = 0.001
@@ -49,13 +49,13 @@ def main():
     if run:
         # Loop over the number of episodes. At each new episode reset the environment, reset the noise
         # state and set total episode reward to 0
-        for episode in range(episodes):
+        for episode in range(1, episodes):
             state = env.reset()[0]
             noise.reset()
             episode_reward = 0
 
             # Loop over the number of steps in an episode
-            for time in range(time_steps):
+            for time in range(1, time_steps):
                 # Uncomment the following line if you want to visualize the mountain car during training.
                 # Can also be trained without visualization for the case where we are using
                 # position and velocities as state variables.

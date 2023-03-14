@@ -34,7 +34,7 @@ class Critic:
         # Initialize all graph variables
         self.sess.run(tf.compat.v1.global_variables_initializer())
 
-    # Architecture of the critic model and it's target model. The critic take in two inputs; a state and
+    # Architecture of the critic model and its target model. The critic take in two inputs; a state and
     # the action taken in that state to calculate the Q-value of a state action pair.
     # The action input is passes through one dense layer before being merged with the main network.
     def create_model(self, env):

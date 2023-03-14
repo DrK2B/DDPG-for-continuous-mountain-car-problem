@@ -39,13 +39,13 @@ class Actor:
 
         # Use the policy gradient calculated above to update the actor weights. Since we multiply negative of
         # dQ/dA, when we try to minimize J we are actually going uphill (gradient ascent)
-        self.optimize = tf.optimizers.Adam(self.learning_rate).apply_gradients \
+        self.optimize = tf.optimizers.Adam(self.learning_rate).apply_gradients\
             (zip(self.params_grads, self.model.trainable_weights))
 
         # initialize all graph variables
         self.sess.run(tf.compat.v1.global_variables_initializer())
 
-    # Same model architecture for both the actor and critic. Important to note that the out layer has a
+    # Same model architecture for both the actor and critic. Important to note that the output layer has a
     # tanh activation to keep our output in the range.
     def create_model(self, env):
         state_input = Input(shape=env.observation_space.shape)
