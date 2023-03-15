@@ -69,7 +69,7 @@ def main():
                 exploratory_action = noise.get_action(action, time)
 
                 # Take the noisy action to enter the next state
-                next_state, reward, terminated, truncated, _ = env.step(exploratory_action)
+                next_state, reward, terminated, truncated, info = env.step(exploratory_action)
 
                 # Predict the action to be taken given the next_state. This next state action is predicted
                 # using the actor's target model
